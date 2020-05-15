@@ -1,0 +1,44 @@
+/**index.wxss**/
+#index{
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+#index .header{
+  height: 200rpx;
+  width: 100%;
+  background: #000;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+#index .header .h-image{
+  height: 200rpx;
+}
+#index .header .h-image.info{
+  flex:1;
+  padding:10px 20px;
+  box-sizing: border-box;
+}
+#index .header .h-image.logo{
+  width:200rpx;
+}
+
+#index .title{
+  height: 80rpx;
+  line-height: 80rpx;
+  box-sizing: border-box;
+  padding-left:30rpx;
+}
+#index .bodys{
+  height: calc(100% - 280rpx);
+}
+
+#index .bodys .b-title{
+  line-height: 40rpx;
+  height: 80rpx;
+  padding:5px 0px;
+  font-size:40rpx;
+  font-weight:600;
+  text-align: center;
+}

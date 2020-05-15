@@ -1,0 +1,16 @@
+<!--index.wxml-->
+<view id="index">
+	<view class="header">
+		<image class="h-image info" src="http://file.soukys.com/header/contect.png"></image>
+		<image class="h-image logo" src="http://file.soukys.com/header/logo.png"></image>
+	</view>
+	<view class="title">Works Timeline</view>
+	<swiper class="bodys" vertical="true">
+		<swiper-item>
+			<view class="b-title">Mirafiori Agriculture Market Resuscitation Project</view>
+			<view></view>
+		</swiper-item>
+		<swiper-item>2</swiper-item>
+	</swiper>
+
+</view>
