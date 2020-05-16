@@ -5,7 +5,7 @@
   overflow: hidden;
 }
 #index .header{
-  height: 200rpx;
+  height: 300rpx;
   width: 100%;
   background: #000;
   display: flex;
@@ -25,21 +25,22 @@
 }
 
 #index .title{
-  height: 80rpx;
-  line-height: 80rpx;
+  height:100rpx;
+  line-height: 100rpx;
   box-sizing: border-box;
   padding:0 30rpx;
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid #c8c8c8;
 }
 #index .bodys{
-  height: calc(100% - 280rpx);
+  height: calc(100% - 400rpx);
 }
 
 #index .bodys .b-title{
-  height: 80rpx;
+  height: 180rpx;
   margin-top: 20rpx;
-  padding:0 10px;
+  padding:0 20px;
   box-sizing: border-box;
   font-size:40rpx;
   font-weight:600;
@@ -55,8 +56,8 @@
   width: 30rpx;
 }
 #index .bodys .b-img{
-  margin-top: 10rpx;
-  height: calc(100% - 110rpx);
+  
+  height: calc(100% - 210rpx);
   display: flex;
   justify-content: center;
   align-items: center;

@@ -24,8 +24,8 @@
 				<image class="b-img-shadow" model="center" src="{{item.showPage}}"></image>
 			</view>
 
-			<view wx:if="{{item.type == 'video'}}" class="b-img">
-				<video class="b-img-shadow" poster="{{item.showPage}}" src="{{item.videoSrc}}"></video>
+			<view wx:if="{{item.type == 'video'}}" class="b-img" bindtap="showVideo" data-videosrc="{{item.videoSrc}}" data-videoposter="{{item.showPage}}">
+				<image class="b-img-shadow" model="center" src="{{item.showPage}}"></image>
 			</view>
 
 			<view wx:if="{{item.type == 'PDF'}}" class="b-img" bindtap="showPDF" data-url="{{item.PDFSrc}}">
@@ -46,6 +46,10 @@
 					<image model="widthFix" class="mo-img" src="{{item}}"></image>
 				</swiper-item>
 			</swiper>
+	</view>
+
+	<view class="modal" hidden="{{hiddenVideo}}" bindtap="closeVideo">
+		<video class="b-img-shadow" id="myvideo" poster="{{videoposter}}" src="{{videosrc}}" controls="true" catchtap="stopEvent"></video>
 	</view>
 
 	<view class="loading flex-center" hidden="{{loading}}">
