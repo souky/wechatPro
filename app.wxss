@@ -1,10 +1,56 @@
 /**app.wxss**/
-.container {
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal .model-scr{
+  width: 80vw;
+  max-height: 80vh;
+  background-color: #fff;
+  border-radius: 5px;
+  word-break: break-all;
+  box-sizing: border-box;
+  padding:20px;
+  
+}
+.modal .model-scr-img{
+  width:98vw;
   height: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-} 
+}
+.modal .model-scr-img .mo-img{
+  width: 100%;
+}
+
+.loading{
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  left:0;
+  top:0;
+}
+.loading-img{
+  width: 36px;
+  height: 36px;
+  animation: rotate 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate{from{transform: rotate(0deg)}
+    to{transform: rotate(360deg)}
+}

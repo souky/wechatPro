@@ -28,17 +28,40 @@
   height: 80rpx;
   line-height: 80rpx;
   box-sizing: border-box;
-  padding-left:30rpx;
+  padding:0 30rpx;
+  display: flex;
+  justify-content: space-between;
 }
 #index .bodys{
   height: calc(100% - 280rpx);
 }
 
 #index .bodys .b-title{
-  line-height: 40rpx;
   height: 80rpx;
-  padding:5px 0px;
+  margin-top: 20rpx;
+  padding:0 10px;
+  box-sizing: border-box;
   font-size:40rpx;
   font-weight:600;
-  text-align: center;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#index .bodys .b-title .b-t-text{
+  flex: 1;
+}
+#index .bodys .b-title .b-t-more{
+  width: 30rpx;
+}
+#index .bodys .b-img{
+  margin-top: 10rpx;
+  height: calc(100% - 110rpx);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#index .bodys .b-img .b-img-shadow{
+  width: 95%;
+  box-shadow: 5px 5px 17px 1px rgba(0, 0, 0, 0.5);
 }

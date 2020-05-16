@@ -4,13 +4,51 @@
 		<image class="h-image info" src="http://file.soukys.com/header/contect.png"></image>
 		<image class="h-image logo" src="http://file.soukys.com/header/logo.png"></image>
 	</view>
-	<view class="title">Works Timeline</view>
+	<view class="title">
+		<view wx:if="{{internation == 'en'}}">Works Timeline</view>
+		<view wx:if="{{internation == 'zh'}}">工作成果</view>
+		<picker mode="selector" range="{{internationList}}" value="{{index}}" range-key="value" bindchange="handleChange">
+			<view class="picker">
+				{{internationList[index].value}}
+			</view>
+		</picker>
+	</view>
 	<swiper class="bodys" vertical="true">
-		<swiper-item>
-			<view class="b-title">Mirafiori Agriculture Market Resuscitation Project</view>
-			<view></view>
-		</swiper-item>
-		<swiper-item>2</swiper-item>
-	</swiper>
+		<swiper-item wx:for="{{timeLineList}}" wx:key="showPage">
+			<view class="b-title" bindtap="openModal" data-text='{{item[internation].text}}'>
+				<view class="b-t-text">{{item[internation].title}}</view>
+				<view class="b-t-more">></view>
+			</view>
+			<view wx:if="{{item.type == 'banner'}}" class="b-img"
+			 bindtap="showImg" data-list="{{item.bannerList}}">
+				<image class="b-img-shadow" model="center" src="{{item.showPage}}"></image>
+			</view>
 
+			<view wx:if="{{item.type == 'video'}}" class="b-img">
+				<video class="b-img-shadow" poster="{{item.showPage}}" src="{{item.videoSrc}}"></video>
+			</view>
+
+			<view wx:if="{{item.type == 'PDF'}}" class="b-img" bindtap="showPDF" data-url="{{item.PDFSrc}}">
+				<image class="b-img-shadow" src="{{item.showPage}}"></image>
+			</view>
+		</swiper-item>
+		
+	</swiper>
+	<view class="modal" hidden="{{hiddenmoda}}" bindtap="closeModal">
+			<scroll-view class="model-scr" scroll-y='true' catchtap="stopEvent">
+				<view>{{modalText}}</view>
+			</scroll-view>
+	</view>
+
+	<view class="modal" hidden="{{hiddenImg}}" bindtap="closeImg">
+			<swiper indicator-dots="true" circular="true" class="model-scr-img">
+				<swiper-item class="flex-center" wx:for="{{tempImgList}}" wx:key="item">
+					<image model="widthFix" class="mo-img" src="{{item}}"></image>
+				</swiper-item>
+			</swiper>
+	</view>
+
+	<view class="loading flex-center" hidden="{{loading}}">
+		<image class="loading-img" src="http://file.soukys.com/loading.png"></image>
+	</view>
 </view>
