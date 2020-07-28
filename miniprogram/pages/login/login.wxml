@@ -1,0 +1,16 @@
+<view class="login-main flex-center-col">
+	<view class="login-logo">
+		<image mode="aspectFit" src="../../images/logo.png" class="img"></image>
+	</view>
+
+	<!-- <view class="login-text left">计划</view>
+  <view class="login-text right">创造</view>
+  <view class="login-text left">美好</view>
+  <view class="login-text right">生活</view> -->
+	<view class="login-text">PLAN PLUS</view>
+	<view class="login-text">BEAUTIFUL LIFE</view>
+
+	<view class="login-btn">
+		<button class=""  open-type="getUserInfo" type="primary" bindgetuserinfo="onGetOpenid">微信登陆</button>
+	</view>
+</view>

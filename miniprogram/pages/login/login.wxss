@@ -1,0 +1,36 @@
+.login-main{
+  background: #fff;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  
+}
+.login-logo{
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: 5vh;
+  margin-bottom: 10vh;
+}
+
+.login-logo .img{
+  width: 100%;
+  height: 100%;
+}
+
+.login-text{
+  font-size: 42px;
+  color:#666;
+}
+.login-text.left{
+  padding-right: 30vw;
+}
+.login-text.right{
+  padding-left: 30vw;
+}
+
+.login-btn{
+  position: fixed;
+  bottom:10vh;
+}
