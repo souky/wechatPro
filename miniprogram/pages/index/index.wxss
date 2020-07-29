@@ -1,1 +1,18 @@
-/* miniprogram/pages/index/index.wxss */
+.user-info{
+  height: 60px;
+  margin-top: 5px;
+}
+
+.user-info .img{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  margin-left: 10px;
+}
+
+.user-info .user-name{
+  flex: 1;
+  box-sizing: border-box;
+  padding-left: 20px;
+}

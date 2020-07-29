@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "mp-tabbar": "/miniprogram_npm/weui-miniprogram/tabbar/tabbar"
+    "mp-icon": "/miniprogram_npm/weui-miniprogram/icon/icon",
+    "tool-bar":"../../components/toolBar/toolBar"
   }
 }

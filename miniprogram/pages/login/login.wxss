@@ -31,6 +31,6 @@
 }
 
 .login-btn{
-  position: fixed;
+  position: absolute;
   bottom:10vh;
 }

@@ -22,12 +22,13 @@ Page({
       name: 'login',
       data: {},
       success: res => {
-        app.globalData.openid = res.result.openid 
-        app.$query('user_info',{openid:res.result.openid},res=>{
+        userInfo.openid = res.result.openid 
+        app.globalData.userInfo = userInfo
+        app.$query('user_info',{openid:userInfo.openid},res=>{
           if(res.length == '0'){
             // 需要增加用户信息
             let user = {
-              openid:app.globalData.openid,
+              openid:userInfo.openid,
               nickName:userInfo.nickName,
               gender:userInfo.gender,
               avatarUrl:userInfo.avatarUrl,
@@ -44,6 +45,9 @@ Page({
             })
           }else{
             wx.hideLoading()
+            wx.navigateTo({
+              url: '../index/index'
+            })
             console.log('已经注册');
           }
         })

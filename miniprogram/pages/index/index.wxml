@@ -1,1 +1,14 @@
-<mp-tabbar style="position:fixed;bottom:0;width:100%;left:0;right:0;" list="{{list}}" bindchange="tabChange"></mp-tabbar>
+<scroll-view class="main-view">
+  <view class="user-info flex-between">
+    <image mode="aspectFit" src="{{userInfo.avatarUrl}}" class="img"></image>
+    <view class="user-name">{{userInfo.nickName}}</view>
+  </view>
+
+  
+</scroll-view>
+<tool-bar active-color="#7890ad" 
+  un-active-color="#666"
+  size="28"
+  active-icon="home"
+  dataList="{{dataList}}"
+></tool-bar>

@@ -1,0 +1,14 @@
+<view class="tool-bar">
+ 
+  <view class="tool-bar-items" wx:for="{{dataList}}"
+      wx:key="icon">
+    <view class="items-icon">
+      <mp-icon icon="{{item.icon}}" 
+      color="{{item.icon == activeIcon?activeColor:unActiveColor}}" 
+      size="{{size}}"></mp-icon>
+    </view>
+    <view class="items-text"
+      style="color:{{item.icon == activeIcon?activeColor:unActiveColor}}"
+    >{{item.text}}</view>
+  </view>
+</view>

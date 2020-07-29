@@ -1,0 +1,28 @@
+.tool-bar{
+  position: fixed;
+  width: 100vw;
+  height: 60px;
+  background: #f1f1f1;
+  left:0;
+  bottom:0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.tool-bar-items{
+  width: 100px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color:#666;
+}
+.tool-bar-items .items-icon{
+  height: 30px;
+  line-height: 40px;
+}
+
+.tool-bar-items .items-text{
+  height: 30px;
+  line-height: 30px;
+}

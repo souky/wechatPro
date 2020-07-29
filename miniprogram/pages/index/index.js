@@ -1,34 +1,28 @@
-// miniprogram/pages/index/index.js
-Page({
+const app = getApp()
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
-    list: [{
-      "text": "对话",
-      "iconPath": "../../images/tabbar_icon_chat_default.png",
-      "selectedIconPath": "../../images/tabbar_icon_chat_active.png",
-    },
-    {
-      "text": "设置",
-      "iconPath": "../../images/tabbar_icon_setting_default.png",
-      "selectedIconPath": "../../images/tabbar_icon_setting_active.png"
-    }]
+    dataList: [
+      {"icon": "home","text": "首页"},
+      {"icon": "me","text": "我的"},
+    ],
+    userInfo:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    let data = {
+      userInfo:app.globalData.userInfo
+    }
+    this.setData(data)
   },
 
   /**
