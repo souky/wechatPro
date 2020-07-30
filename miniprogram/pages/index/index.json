@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "mp-icon": "/miniprogram_npm/weui-miniprogram/icon/icon",
-    "tool-bar":"../../components/toolBar/toolBar"
+    "tool-bar":"../../components/toolBar/toolBar",
+    "canvas-ring": "../../components/canvas-ring/canvas-ring"
   }
 }

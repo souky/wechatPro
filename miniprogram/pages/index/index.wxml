@@ -1,9 +1,39 @@
 <scroll-view class="main-view">
   <view class="user-info flex-between">
-    <image mode="aspectFit" src="{{userInfo.avatarUrl}}" class="img"></image>
+    <image width="60px" height="60px" mode="aspectFit" 
+    src="{{userInfo.avatarUrl}}" class="img"></image>
     <view class="user-name">{{userInfo.nickName}}</view>
   </view>
 
+  <view class="plan-title">当前任务</view>
+  <view class="plan-item">
+    <view class="plan-item-title">2019/07/07 - 2020/07/07</view>
+    <view class="plan-item-canvas">
+      <canvas-ring id="canvasRing" value="{{80.20}}"></canvas-ring>
+    </view>
+    <view class="plan-item-contents">
+      <view class="plan-item-content">
+        <view class="plan-item-inner">25</view>
+        <view class="plan-item-label">剩余天数</view>
+      </view>
+      <view class="plan-item-line"></view>
+      <view class="plan-item-content">
+        <view class="plan-item-inner">44,560</view>
+        <view class="plan-item-label">完成金额</view>
+      </view>
+      <view class="plan-item-line"></view>
+      <view class="plan-item-content">
+        <view class="plan-item-inner">55,555</view>
+        <view class="plan-item-label">目标金额</view>
+      </view>
+    </view>
+    
+  </view>
+
+  <view class="plan-title">往期任务</view>
+    <view class="plan-list">
+    <view class="non-plan-text">暂无任务</view>
+  </view>
   
 </scroll-view>
 <tool-bar active-color="#7890ad" 
