@@ -6,51 +6,39 @@ Page({
       {"icon": "home","text": "首页"},
       {"icon": "me","text": "我的"},
     ],
-    userInfo:{}
+    userInfo:{},
+    // 是否显示新增
+    showAdd:true,
+    // 不存在记录
+    noRecord:true
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
-    let data = {
-      userInfo:app.globalData.userInfo
-    }
-    this.setData(data)
+    
+  },
+  onShow:function(){
+    this.initData()
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  // 添加计划
+  addPlan:function(){
+    wx.navigateTo({
+      url: '../planadd/planadd',
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  initData:function(){
+    wx.showLoading({title: '加载中',mask:true})
+    // 用户信息
+    let user = app.globalData.userInfo
+    this.setData({
+      userInfo:user
+    })
+    // 任务信息加载
+    app.$query('user_plan',{openid:user.openid},'createData',res=>{
+      if(res.length != 0){
+      }
+      wx.hideLoading()
+    })
   },
 
   /**
@@ -60,9 +48,6 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function () {
 
   }

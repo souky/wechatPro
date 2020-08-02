@@ -24,7 +24,7 @@ Page({
       success: res => {
         userInfo.openid = res.result.openid 
         app.globalData.userInfo = userInfo
-        app.$query('user_info',{openid:userInfo.openid},res=>{
+        app.$query('user_info',{openid:userInfo.openid},'openid',res=>{
           if(res.length == '0'){
             // 需要增加用户信息
             let user = {

@@ -14,8 +14,8 @@ App({
     this.$db = db_
   
     // query通用方法
-    this.$query = (collection,params,fn) => {
-      db_.collection(collection).where(params).get({
+    this.$query = (collection,params,order,fn) => {
+      db_.collection(collection).where(params).orderBy(order,'asc').get({
         success: res => {fn(res.data)},
         fail: err => {
           fn([])

@@ -1,0 +1,32 @@
+.plan-title-add{
+  width: 95%;
+  box-sizing: border-box;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  color:#424242;
+  border-bottom: 1px #b4c6db solid;
+  margin:10px auto;
+  text-align: center;
+}
+
+.plan-form{
+  width: 95%;
+  margin: auto;
+}
+
+.cell--weui-cell{
+  padding:0 10px!important;
+  font-size: 15px;
+  color: #555;
+  height: 50px;
+}
+.weui-cell__hd{
+  text-align: right;
+}
+.weui-cell__bd{
+  text-align: center;
+}
+.weui-select{
+  padding-left: 0px!important;
+}

@@ -5,8 +5,14 @@
     <view class="user-name">{{userInfo.nickName}}</view>
   </view>
 
-  <view class="plan-title">当前任务</view>
-  <view class="plan-item">
+  <view class="plan-title">当前计划</view>
+  <view class="plan-add" wx:if="{{showAdd}}" bindtap="addPlan">
+    <view class="plan-item">
+      <mp-icon icon='add2' size='50' color='#7890ad'/>
+      <view style="color:#666;width:100%;text-align:center">添加计划</view>
+    </view>
+  </view>
+  <view class="plan-item" wx:else>
     <view class="plan-item-title">2019/07/07 - 2020/07/07</view>
     <view class="plan-item-canvas">
       <canvas-ring id="canvasRing" value="{{80.20}}"></canvas-ring>
@@ -30,9 +36,30 @@
     
   </view>
 
-  <view class="plan-title">往期任务</view>
+  <view class="plan-title">往期计划</view>
     <view class="plan-list">
-    <view class="non-plan-text">暂无任务</view>
+    <view class="non-plan-text" wx:if="{{noRecord}}">暂无计划</view>
+
+    <view class="plan-item" wx:else >
+      <view class="plan-item-title">2019/07/07 - 2020/07/07</view>
+      <view class="plan-item-contents">
+        <view class="plan-item-content">
+          <view class="plan-item-inner">已完成</view>
+          <view class="plan-item-label">完成情况</view>
+        </view>
+        <view class="plan-item-line"></view>
+        <view class="plan-item-content">
+          <view class="plan-item-inner">44,560</view>
+          <view class="plan-item-label">完成金额</view>
+        </view>
+        <view class="plan-item-line"></view>
+        <view class="plan-item-content">
+          <view class="plan-item-inner">55,555</view>
+          <view class="plan-item-label">目标金额</view>
+        </view>
+      </view>
+      
+    </view>
   </view>
   
 </scroll-view>
