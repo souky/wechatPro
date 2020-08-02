@@ -2,12 +2,11 @@ Page({
   data: {
     error:'',
     rules:[
-      {
-        name: 'palnDates',
-        rules: {required: true, message: '单选列表是必选项'},
-      }
+      {name: 'palnDates',rules: {required: true, message: '计划时长必选'}},
+      {name: 'palnType',rules: {required: true, message: '计划类型必选'}},
+      {name: 'planStartDate',rules: {required: true, message: '计划开始时间必选'}}
     ],
-    baseInfo:{},
+    baseInfo:{isRemind:false},
     palnDatess:["月(30天)", "季度(90天)", "年(365天)"],
     palnTypes:["自然序列和", "质数序列和"],
   },

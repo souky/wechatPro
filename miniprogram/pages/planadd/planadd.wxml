@@ -17,10 +17,14 @@
             </picker>
           </mp-cell>
 
-          <mp-cell prop="planStartDate" title="计划开始时间" ext-class="">
+          <mp-cell show-error prop="planStartDate" title="计划开始时间" ext-class="">
               <picker data-field="planStartDate" mode="date" value="{{baseInfo.planStartDate}}" bindchange="commonChange">
                   <view class="weui-input">{{baseInfo.planStartDate}}</view>
               </picker>
+          </mp-cell>
+
+          <mp-cell  prop="isRemind" title="是否接收提醒" ext-class="text-right">
+              <switch data-field="isRemind" checked="{{baseInfo.isRemind}}" bindchange="commonChange"/>
           </mp-cell>
 
       </mp-cells>
