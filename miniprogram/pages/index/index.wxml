@@ -13,23 +13,23 @@
     </view>
   </view>
   <view class="plan-item" wx:else>
-    <view class="plan-item-title">2019/07/07 - 2020/07/07</view>
+    <view class="plan-item-title">{{baseInfo.planStartDate}} - {{baseInfo.planEndDate}}</view>
     <view class="plan-item-canvas">
-      <canvas-ring id="canvasRing" value="{{80.20}}"></canvas-ring>
+      <canvas-ring id="canvasRing" value="{{baseInfo.completeDegree}}"></canvas-ring>
     </view>
     <view class="plan-item-contents">
       <view class="plan-item-content">
-        <view class="plan-item-inner">25</view>
+        <view class="plan-item-inner">{{baseInfo.days}}</view>
         <view class="plan-item-label">剩余天数</view>
       </view>
       <view class="plan-item-line"></view>
       <view class="plan-item-content">
-        <view class="plan-item-inner">44,560</view>
+        <view class="plan-item-inner">{{baseInfo.totalMoney}}</view>
         <view class="plan-item-label">完成金额</view>
       </view>
       <view class="plan-item-line"></view>
       <view class="plan-item-content">
-        <view class="plan-item-inner">55,555</view>
+        <view class="plan-item-inner">{{baseInfo.targetMoney}}</view>
         <view class="plan-item-label">目标金额</view>
       </view>
     </view>
@@ -40,26 +40,28 @@
     <view class="plan-list">
     <view class="non-plan-text" wx:if="{{noRecord}}">暂无计划</view>
 
-    <view class="plan-item" wx:else >
-      <view class="plan-item-title">2019/07/07 - 2020/07/07</view>
-      <view class="plan-item-contents">
-        <view class="plan-item-content">
-          <view class="plan-item-inner">已完成</view>
-          <view class="plan-item-label">完成情况</view>
-        </view>
-        <view class="plan-item-line"></view>
-        <view class="plan-item-content">
-          <view class="plan-item-inner">44,560</view>
-          <view class="plan-item-label">完成金额</view>
-        </view>
-        <view class="plan-item-line"></view>
-        <view class="plan-item-content">
-          <view class="plan-item-inner">55,555</view>
-          <view class="plan-item-label">目标金额</view>
+    <view wx:else>
+      <view class="plan-item"  wx:for="{{hisList}}" wx:key="_id">
+        <view class="plan-item-title">{{item.planStartDate}} - {{item.planEndDate}}</view>
+        <view class="plan-item-contents">
+          <view class="plan-item-content">
+            <view class="plan-item-inner">{{item.isComplete?'已完成':'未完成'}}</view>
+            <view class="plan-item-label">完成情况</view>
+          </view>
+          <view class="plan-item-line"></view>
+          <view class="plan-item-content">
+            <view class="plan-item-inner">{{item.totalMoney}}</view>
+            <view class="plan-item-label">完成金额</view>
+          </view>
+          <view class="plan-item-line"></view>
+          <view class="plan-item-content">
+            <view class="plan-item-inner">{{item.targetMoney}}</view>
+            <view class="plan-item-label">目标金额</view>
+          </view>
         </view>
       </view>
-      
     </view>
+   
   </view>
   
 </scroll-view>

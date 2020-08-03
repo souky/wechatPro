@@ -5,7 +5,7 @@
     <mp-form id="form" rules="{{rules}}" models="{{baseInfo}}">
 
       <mp-cells title="计划信息">
-          <mp-cell show-error prop="palnDates" title="计划时间" ext-class="">
+          <mp-cell show-error prop="palnDates" title="计划时长" ext-class="">
             <picker bindchange="commonChange" data-field="palnDates" value="{{baseInfo.palnDates}}" range="{{palnDatess}}">
                 <view class="weui-select">{{palnDatess[baseInfo.palnDates]}}</view>
             </picker>
@@ -23,7 +23,7 @@
               </picker>
           </mp-cell>
 
-          <mp-cell  prop="isRemind" title="是否接收提醒" ext-class="text-right">
+          <mp-cell title="是否接收提醒" ext-class="text-right">
               <switch data-field="isRemind" checked="{{baseInfo.isRemind}}" bindchange="commonChange"/>
           </mp-cell>
 
