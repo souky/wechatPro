@@ -45,7 +45,7 @@ Page({
             })
           }else{
             wx.hideLoading()
-            wx.navigateTo({
+            wx.redirectTo({
               url: '../index/index'
             })
             console.log('已经注册');

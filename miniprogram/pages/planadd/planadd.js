@@ -56,7 +56,23 @@ Page({
         },'openid',res=>{
           if(res.length == 0){
             // 可以新增
-            this.planAddDB()
+            wx.cloud.callFunction({
+              name: 'addPlan',
+              data: {
+                baseInfo:this.data.baseInfo
+              },
+              complete: res => {
+                if(res.result.success) {
+                  wx.hideLoading()
+                  wx.redirectTo({url: '../index/index'})
+                }else{
+                  wx.showToast({
+                    icon: 'none',
+                    title: '新增失败,请稍后再试'
+                  })
+                }
+              }
+            })
           }else{
             wx.showToast({
               icon: 'none',
@@ -66,87 +82,5 @@ Page({
         })
       }
     })
-  },
-  planAddDB:function(){
-    let planId = new Date().getTime()+''
-    let planEndDate = new Date(this.data.baseInfo.planStartDate)
-    let days = [30,90,365]
-    planEndDate.setDate(planEndDate.getDate() + days[this.data.baseInfo.palnDates])
-    planEndDate.setHours(23)
-    planEndDate.setMinutes(59)
-    planEndDate.setSeconds(59)
-    let temp_ = this.getMoney(planId,this.data.baseInfo.palnType,days[this.data.baseInfo.palnDates])
-    let targetMoney = temp_.sum
-    let data = {
-      _id:planId,
-      openid:app.globalData.userInfo.openid,
-      palnDates:this.data.baseInfo.palnDates,
-      palnType:this.data.baseInfo.palnType,
-      planStartDate:new Date(this.data.baseInfo.planStartDate),
-      planEndDate:planEndDate,
-      completeDegree:0,
-      totalMoney:0,
-      targetMoney:targetMoney,
-      isComplete:false,
-      createData:new Date(),
-      isActive:true,
-    }
-    app.$add('user_plan',data,res=>{
-      if(res){
-        let objArray = temp_.objArray
-        objArray.forEach(e=>{
-          app.$add('user_plan_items',e,res=>{})
-        })
-        wx.hideLoading()
-        wx.navigateTo({
-          url: '../index/index',
-        })
-      }else{
-        wx.hideLoading()
-        wx.showToast({
-          icon: 'none',
-          title: '添加失败'
-        })
-      }
-    })
-    
-    console.log(data);
-  },
-  getMoney:function(planId,type,days){
-    let array = new Array()
-    let sum = 0 
-    let objArray = new Array()
-    if(type == 0){
-      for(let i = 1;i <= days;i++){
-        array.push(i)
-        sum += i
-        let obj = {
-          openid:app.globalData.userInfo.openid,
-          planId:planId,
-          inMoney:i,
-          isDone:false
-        }
-        objArray.push(obj)
-      }
-    }else{
-      for(let i = 0;i < days;i++){
-        if(arrayZ[i]){
-          array.push(arrayZ[i])
-          sum += arrayZ[i]
-          let obj = {
-            openid:app.globalData.userInfo.openid,
-            planId:planId,
-            inMoney:arrayZ[i],
-            isDone:false
-          }
-          objArray.push(obj)
-        }else break;
-      }
-    }
-    return {
-      array:array,
-      sum:sum,
-      objArray:objArray
-    }
   }
 })

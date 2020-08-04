@@ -17,14 +17,13 @@
 }
 
 .main-view{
-  width: 95vw;
-  height: calc(100vh - 80px);
-  margin:10px auto;
+  width: 100vw;
+  height: calc(97vh - 60px);
+  padding-top: 3vh;
   background: #dfebf9;
-  border-radius: 10px;
 }
 
 .main-view.full{
-  height: calc(97vh - 20px);
+  height: calc(97vh);
   padding-top: 3vh;
 }

@@ -1,4 +1,4 @@
-<scroll-view class="main-view">
+<scroll-view class="main-view" scroll-with-animation scroll-y>
   <view class="user-info flex-between">
     <image width="60px" height="60px" mode="aspectFit" 
     src="{{userInfo.avatarUrl}}" class="img"></image>
@@ -40,7 +40,7 @@
     <view class="plan-list">
     <view class="non-plan-text" wx:if="{{noRecord}}">暂无计划</view>
 
-    <view wx:else>
+    <view wx:else style="width:100%">
       <view class="plan-item"  wx:for="{{hisList}}" wx:key="_id">
         <view class="plan-item-title">{{item.planStartDate}} - {{item.planEndDate}}</view>
         <view class="plan-item-contents">

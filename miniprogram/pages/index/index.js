@@ -40,14 +40,16 @@ Page({
       if(res.length != 0){
         let hisList = new Array()
         res.forEach(e=>{
+          e.days = this.getDays(e.planStartDate,e.planEndDate)
           e.planStartDate = this.formatData(e.planStartDate)
           e.planEndDate = this.formatData(e.planEndDate)
-          e.days = this.getDays(e.planEndDate)
-          if(e.isActive) this.setData({showAdd:false,baseInfo:e})
+          if(e.isActive) {
+            this.setData({showAdd:false,baseInfo:e})
+            this.selectComponent('#canvasRing').onLoad()
+          }
           else hisList.push(e)
         })
         
-        this.selectComponent('#canvasRing').onLoad()
         if(hisList.length != 0) {
           this.setData({
             noRecord:false,
@@ -68,17 +70,19 @@ Page({
     strings += date.getDate()
     return strings
   },
-  getDays:(date)=>{
-    date = new Date(date)
-    date.setDate(date.getDate()+1)
-    date.setHours(0)
-    date.setMinutes(0)
-    date.setSeconds(0)
+  getDays:(dateS,dateE)=>{
+    dateE.setHours(0)
+    dateE.setMinutes(0)
+    dateE.setSeconds(0)
+    dateE = dateE.getTime()
     let dataNow = new Date()
+    if(dateS > dataNow){
+      dataNow = dateS
+    }
     dataNow.setHours(0)
     dataNow.setMinutes(0)
     dataNow.setSeconds(0)
-    return parseInt((date-dataNow)/24/60/60/1000)
+    return parseInt((dateE-dataNow)/24/60/60/1000) + 1
   },
 
   /**
