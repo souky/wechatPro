@@ -25,32 +25,23 @@ getMoney = (planId,type,days,openid)=>{
   let array = new Array()
     let sum = 0
     let objArray = new Array()
-    if(type == 0){
-      for(let i = 1;i <= days;i++){
-        array.push(i)
-        sum += i
-        let obj = {
-          openid:openid,
-          planId:planId,
-          inMoney:i,
-          isDone:false
-        }
-        objArray.push(obj)
+
+    for(let i = 1;i <= days;i++){
+
+      let money = 0;
+      if(type == 0) money = i
+      else money = arrayZ[i]
+      if(!money) break;
+
+      array.push(money)
+      sum += money
+      let obj = {
+        openid:openid,
+        planId:planId,
+        inMoney:money,
+        isDone:false
       }
-    }else{
-      for(let i = 0;i < days;i++){
-        if(arrayZ[i]){
-          array.push(arrayZ[i])
-          sum += arrayZ[i]
-          let obj = {
-            openid:openid,
-            planId:planId,
-            inMoney:arrayZ[i],
-            isDone:false
-          }
-          objArray.push(obj)
-        }else break;
-      }
+      objArray.push(obj)
     }
     return {
       array:array,
@@ -81,12 +72,12 @@ exports.main = async (event) => {
     let planId = dateNow.getTime()+''
     let planStartDate = new Date(planInfo.planStartDate)
     planStartDate.setHours(0,0,0,0)
-    
+
     let planEndDate = new Date(planStartDate.getTime())
     let days = [30,90,365]
     planEndDate.setDate(planEndDate.getDate() + days[planInfo.palnDates])
     planEndDate.setHours(23,59,59,0)
-    
+
 
     let temp_ = getMoney(planId,planInfo.palnType,days[planInfo.palnDates],OPENID)
     let targetMoney = temp_.sum
