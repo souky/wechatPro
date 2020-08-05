@@ -42,6 +42,7 @@
   align-items: center;
   color:#424242;
   font-size: 14px;
+  position: relative;
 }
 .plan-item-title{
   width: 80%;
@@ -56,6 +57,17 @@
   display: flex;
   justify-content: center;
 }
+.plan-item .delete-icon{
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+.plan-item .arrow-icon{
+  position: absolute;
+  right: 10px;
+  top: calc(50% - 60px);
+}
+
 .plan-item-contents{
   display: flex;
   width: 100%;

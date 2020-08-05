@@ -1,0 +1,25 @@
+
+<view class="money-title">快来存钱鸭！</view>
+<view class="money">
+  <view wx:for="{{list}}" wx:key="_id" class="money-items">
+    <view wx:if="{{item.isDone}}" class="done" bindlongtap="outMoney"
+    data-index="{{index}}" data-id="{{item._id}}" data-in="{{item.inMoney}}">
+      <image mode="aspectFit" class="money-img" src="../../images/done.png" />
+      <view class="done-num">{{item.inMoney}}</view>
+    </view>
+    <view class="done" wx:else bindtap="inMoney" data-index="{{index}}"
+     data-id="{{item._id}}" data-in="{{item.inMoney}}">
+      {{item.inMoney}}
+    </view>
+  </view>
+</view>
+
+<mp-dialog title="提示" show="{{dialogShow}}" bindbuttontap="updateMoney" buttons="{{buttons}}">
+    <view>是否记录此金额</view>
+    <view style="font-size:32px">{{moneyInfo.inMoney}}</view>
+</mp-dialog>
+
+<mp-dialog title="提示" show="{{dialogShowIn}}" bindbuttontap="updateMoney" buttons="{{buttons}}">
+    <view>是否撤销此金额</view>
+    <view style="font-size:32px">{{(0 - moneyInfo.inMoney)}}</view>
+</mp-dialog>

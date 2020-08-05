@@ -11,7 +11,7 @@ const _ = db.command
 
 exports.main = async (event) => {
   const { ENV, OPENID, APPID } = cloud.getWXContext()
-  const { planInfo, _id , inMoney } = event
+  const {planId , _id , inMoney } = event
 
 
   try{
@@ -19,22 +19,24 @@ exports.main = async (event) => {
 
     let dateNow = new Date()
 
+    const planInfo = await transaction.collection('user_plan').doc(planId).get()
+    let isDone = inMoney > 0
     const updateFlag = await transaction.collection('user_plan_items').doc(_id).update({
-      data:{isDone:true,inDate:dateNow}
+      data:{isDone:isDone,inDate:dateNow}
     })
     if(updateFlag.stats.updated == 1){
       // 更新主任务进度
-      let totalMoney = planInfo.totalMoney + inMoney
-      const targetMoney = planInfo.targetMoney
+      let totalMoney = planInfo.data.totalMoney + inMoney
+      const targetMoney = planInfo.data.targetMoney
 
-      let completeDegree = (totalMoney / targetMoney).toFixed(2)
-      let isComplete = planInfo.isComplete
-      let isActive = planInfo.isActive
+      let completeDegree = (totalMoney / targetMoney * 100).toFixed(2)
+      let isComplete = planInfo.data.isComplete
+      let isActive = planInfo.data.isActive
       if(totalMoney == targetMoney){
         isComplete = true
         isActive = false
       }
-      const updateFlag_ = await transaction.collection('user_plan').doc(planInfo._id).update({
+      const updateFlag_ = await transaction.collection('user_plan').doc(planInfo.data._id).update({
         data:{
           totalMoney:totalMoney,
           completeDegree:completeDegree,

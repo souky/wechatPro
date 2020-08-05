@@ -12,7 +12,9 @@ Page({
     // 是否显示新增
     showAdd:true,
     // 不存在记录
-    noRecord:true
+    noRecord:true,
+    dialogShow:false,
+    buttons:[{text: '取消'}, {text: '确定'}]
   },
   onReady: function () {
     
@@ -25,6 +27,44 @@ Page({
   addPlan:function(){
     wx.navigateTo({
       url: '../planadd/planadd',
+    })
+  },
+  // 删除计划
+  deletePlan:function(){
+    this.setData({dialogShow:true})
+  },
+  tapDialogButton:function(e){
+    if(e.detail.index == 1){
+      this.setData({dialogShow:false})
+      wx.showLoading({title: '删除中',mask:true})
+      wx.cloud.callFunction({
+        name: 'deletePlan',
+        data: {
+          planId:this.data.baseInfo._id
+        },
+        complete: res => {
+          if(res.result.success) {
+            wx.hideLoading()
+            this.initData()
+          }else{
+            wx.showToast({
+              icon: 'none',
+              title: '删除失败,请稍后再试'
+            })
+          }
+        }
+      })
+      
+    }else{
+      this.setData({dialogShow:false})
+    }
+  },
+
+  // 计划详情
+  planInfo:function(){
+    let id = this.data.baseInfo._id
+    wx.navigateTo({
+      url: '/pages/planInfo/planInfo?id='+id,
     })
   },
 
@@ -49,6 +89,13 @@ Page({
           }
           else hisList.push(e)
         })
+
+        if(hisList.length == res.length) {
+          this.setData({
+            showAdd:true,
+            baseInfo:{}
+          })
+        }
         
         if(hisList.length != 0) {
           this.setData({
@@ -56,6 +103,8 @@ Page({
             hisList:hisList
           })
         }
+      }else{
+        this.setData({showAdd:true,baseInfo:{}})
       }
 
       wx.hideLoading()

@@ -1,4 +1,4 @@
-<scroll-view class="main-view" scroll-with-animation scroll-y>
+<view class="main-view full" >
   <view class="user-info flex-between">
     <image width="60px" height="60px" mode="aspectFit" 
     src="{{userInfo.avatarUrl}}" class="img"></image>
@@ -13,7 +13,12 @@
     </view>
   </view>
   <view class="plan-item" wx:else>
-    <view class="plan-item-title">{{baseInfo.planStartDate}} - {{baseInfo.planEndDate}}</view>
+    <mp-icon icon='delete' bindtap="deletePlan" extClass="delete-icon" size='24' color='#F56C6C'/>
+    <mp-icon icon='arrow' bindtap="planInfo" extClass="arrow-icon" size='50' color='#ccc'/>
+    
+    <view class="plan-item-title">
+      {{baseInfo.planStartDate}} - {{baseInfo.planEndDate}}
+    </view>
     <view class="plan-item-canvas">
       <canvas-ring id="canvasRing" value="{{baseInfo.completeDegree}}"></canvas-ring>
     </view>
@@ -64,10 +69,14 @@
    
   </view>
   
-</scroll-view>
-<tool-bar active-color="#7890ad" 
+</view>
+<!-- <tool-bar active-color="#7890ad" 
   un-active-color="#666"
   size="28"
   active-icon="home"
   dataList="{{dataList}}"
-></tool-bar>
+></tool-bar> -->
+
+<mp-dialog title="提示" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+    <view>删除计划的同时会删除对应存钱明细,确认删除咩？</view>
+</mp-dialog>

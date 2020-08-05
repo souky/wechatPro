@@ -18,14 +18,12 @@ exports.main = async (event) => {
     const transaction = await db.startTransaction()
 
     const deleteFlag = await transaction.collection('user_plan').doc(planId).remove()
-    if(addFlag.stats.removed == 1){
+    if(deleteFlag.stats.removed == 1){
       // 查询子项目数量
-
-      const count = await db.collection('user_plan_items').aggregate().match({planId:planId}).count('count').end()
-
+      const count = await transaction.collection('user_plan_items').where({planId:planId}).count()
       const res = await transaction.collection('user_plan_items').where({planId:planId}).remove()
       
-      if(res.stats.removed == count){
+      if(res.stats.removed == count.total){
         transaction.commit()
         return {success:true}
       }else{

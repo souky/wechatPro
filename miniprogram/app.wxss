@@ -21,6 +21,7 @@
   height: calc(97vh - 60px);
   padding-top: 3vh;
   background: #dfebf9;
+  overflow: auto;
 }
 
 .main-view.full{

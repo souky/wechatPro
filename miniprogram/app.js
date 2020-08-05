@@ -28,6 +28,18 @@ App({
     }
 
     // install通用方法
+    this.$queryById = (collection,params,fn) => {
+      db_.collection(collection).doc(params).get({
+        success: function(res) {
+          fn(res.data)
+        },
+        fail: err=>{
+          fn(undefined)
+        }
+      })
+    }
+
+    // install通用方法
     this.$add = (collection,params,fn) => {
       db_.collection(collection).add({
         data:params,
