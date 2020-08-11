@@ -30,11 +30,13 @@ exports.main = async (event) => {
       const targetMoney = planInfo.data.targetMoney
 
       let completeDegree = (totalMoney / targetMoney * 100).toFixed(2)
-      let isComplete = planInfo.data.isComplete
-      let isActive = planInfo.data.isActive
+      let isComplete,isActive
       if(totalMoney == targetMoney){
         isComplete = true
         isActive = false
+      }else{
+        isComplete = false
+        isActive = true
       }
       const updateFlag_ = await transaction.collection('user_plan').doc(planInfo.data._id).update({
         data:{
