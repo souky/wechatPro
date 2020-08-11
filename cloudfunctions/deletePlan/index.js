@@ -11,7 +11,6 @@ const _ = db.command
 
 
 exports.main = async (event) => {
-  const { ENV, OPENID, APPID } = cloud.getWXContext()
   let planId = event.planId
 
   try{
@@ -22,7 +21,7 @@ exports.main = async (event) => {
       // 查询子项目数量
       const count = await transaction.collection('user_plan_items').where({planId:planId}).count()
       const res = await transaction.collection('user_plan_items').where({planId:planId}).remove()
-      
+
       if(res.stats.removed == count.total){
         transaction.commit()
         return {success:true}

@@ -14,10 +14,10 @@ Page({
     // 不存在记录
     noRecord:true,
     dialogShow:false,
-    buttons:[{text: '取消'}, {text: '确定'}]
+    buttons:[{text: '取消'}, {text: '确定'}],
   },
   onReady: function () {
-    
+
   },
   onShow:function(){
     this.initData()
@@ -54,7 +54,7 @@ Page({
           }
         }
       })
-      
+
     }else{
       this.setData({dialogShow:false})
     }
@@ -66,6 +66,39 @@ Page({
     wx.navigateTo({
       url: '/pages/planInfo/planInfo?id='+id,
     })
+  },
+
+  // 订阅状态
+  changeRemind(e){
+    let isRemind = e.detail
+    if(isRemind) {
+      wx.requestSubscribeMessage({
+        tmplIds: ['Zfx6gEoTCnkPyMsPToYisufGxBC_wiM7LI2QbzwvPjs'],
+        success (res) {
+          if(res.errMsg == 'requestSubscribeMessage:ok'){
+            if(res['Zfx6gEoTCnkPyMsPToYisufGxBC_wiM7LI2QbzwvPjs'] == 'accept'){
+              app.$db.collection('user_plan').doc(this.data.baseInfo._id).update({
+                isRemind:true
+              }).then(res=>{
+                console.log(res);
+              })
+            }else{
+              this.setData({baseInfo.isRemind:false})
+              wx.showToast({icon: 'none',title: '不要拒绝哦'})
+            }
+          }else{
+            this.setData({baseInfo.isRemind:false})
+            wx.showToast({icon: 'none',title: '修改失败了鸭'})
+          }
+        }
+      })
+    }else{
+      app.$db.collection('user_plan').doc(this.data.baseInfo._id).update({
+        isRemind:false
+      }).then(res=>{
+        console.log(res);
+      })
+    }
   },
 
   initData:function(){
@@ -96,7 +129,7 @@ Page({
             baseInfo:{}
           })
         }
-        
+
         if(hisList.length != 0) {
           this.setData({
             noRecord:false,

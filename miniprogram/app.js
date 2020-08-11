@@ -9,11 +9,11 @@ App({
         traceUser: true,
       })
     }
-    
+
     const db_ = wx.cloud.database()
     this.$db = db_
-  
-    // query通用方法
+
+    // query 通用方法
     this.$query = (collection,params,order,fn) => {
       db_.collection(collection).where(params).orderBy(order,'asc').get({
         success: res => {fn(res.data)},
@@ -27,7 +27,7 @@ App({
       })
     }
 
-    // install通用方法
+    // queryById 通用方法
     this.$queryById = (collection,params,fn) => {
       db_.collection(collection).doc(params).get({
         success: function(res) {
@@ -39,7 +39,7 @@ App({
       })
     }
 
-    // install通用方法
+    // install 通用方法
     this.$add = (collection,params,fn) => {
       db_.collection(collection).add({
         data:params,
