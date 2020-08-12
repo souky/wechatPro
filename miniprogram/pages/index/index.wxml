@@ -18,9 +18,6 @@
 
     <view class="plan-item-title">
       {{baseInfo.planStartDate}} - {{baseInfo.planEndDate}}
-      <view class="">
-        <switch checked="{{baseInfo.isRemind}}" bindchange="changeRemind"/>
-      </view>
     </view>
     <view class="plan-item-canvas">
       <canvas-ring id="canvasRing" value="{{baseInfo.completeDegree}}"></canvas-ring>
@@ -40,6 +37,10 @@
         <view class="plan-item-inner">{{baseInfo.targetMoney}}</view>
         <view class="plan-item-label">目标金额</view>
       </view>
+    </view>
+    <view class="plan-remind">
+      <view>是否提醒</view>
+      <switch checked="{{baseInfo.isRemind}}" bindchange="changeRemind"/>
     </view>
 
   </view>

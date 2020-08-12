@@ -70,33 +70,46 @@ Page({
 
   // 订阅状态
   changeRemind(e){
-    let isRemind = e.detail
-    if(isRemind) {
+    if(e.detail.value) {
+      let id = this.data.baseInfo._id
+      let this_ = this
       wx.requestSubscribeMessage({
         tmplIds: ['Zfx6gEoTCnkPyMsPToYisufGxBC_wiM7LI2QbzwvPjs'],
         success (res) {
           if(res.errMsg == 'requestSubscribeMessage:ok'){
             if(res['Zfx6gEoTCnkPyMsPToYisufGxBC_wiM7LI2QbzwvPjs'] == 'accept'){
-              app.$db.collection('user_plan').doc(this.data.baseInfo._id).update({
-                isRemind:true
-              }).then(res=>{
-                console.log(res);
+              app.$db.collection('user_plan').doc(id).update({
+                data:{isRemind:true}
+              }).then(ress=>{
+                if(ress.stats.updated == 1){
+                  wx.showToast({icon: 'success',title: '订阅成功了鸭'})
+                  this_.setData({[`baseInfo.isRemind`]:true})
+                }else{
+                  wx.showToast({icon: 'none',title: '订阅失败了鸭'})
+                  this_.setData({[`baseInfo.isRemind`]:false})
+                }
               })
             }else{
-              this.setData({baseInfo.isRemind:false})
+              this_.setData({[`baseInfo.isRemind`]:false})
               wx.showToast({icon: 'none',title: '不要拒绝哦'})
             }
           }else{
-            this.setData({baseInfo.isRemind:false})
-            wx.showToast({icon: 'none',title: '修改失败了鸭'})
+            this_.setData({[`baseInfo.isRemind`]:false})
+            wx.showToast({icon: 'none',title: '订阅失败了鸭'})
           }
         }
       })
     }else{
       app.$db.collection('user_plan').doc(this.data.baseInfo._id).update({
-        isRemind:false
+        data:{isRemind:false}
       }).then(res=>{
-        console.log(res);
+        if(res.stats.updated == 1){
+          wx.showToast({icon: 'success',title: '取消订阅成功'})
+          this_.setData({[`baseInfo.isRemind`]:false})
+        }else{
+          wx.showToast({icon: 'none',title: '取消订阅失败'})
+          this_.setData({[`baseInfo.isRemind`]:true})
+        }
       })
     }
   },

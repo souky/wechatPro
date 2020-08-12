@@ -92,6 +92,7 @@ exports.main = async (event) => {
       totalMoney:0,
       targetMoney:targetMoney,
       isComplete:false,
+      isRemind:planInfo.isRemind,
       createData:dateNow,
       isActive:true,
     }

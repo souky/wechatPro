@@ -36,9 +36,30 @@ Page({
   },
   commonChange:function(e){
     let field = e.currentTarget.dataset.field
-    this.setData({
-      [`baseInfo.${field}`]:e.detail.value
-    })
+    let value = e.detail.value
+    if(field == 'isRemind' && value){
+      let this_ = this
+      wx.requestSubscribeMessage({
+        tmplIds: ['Zfx6gEoTCnkPyMsPToYisufGxBC_wiM7LI2QbzwvPjs'],
+        success (res) {
+          if(res.errMsg == 'requestSubscribeMessage:ok'){
+            if(res['Zfx6gEoTCnkPyMsPToYisufGxBC_wiM7LI2QbzwvPjs'] == 'accept'){
+              wx.showToast({icon: 'success',title: '订阅成功了鸭'})
+              this_.setData({[`baseInfo.isRemind`]:true})
+            }else{
+              this_.setData({[`baseInfo.isRemind`]:false})
+              wx.showToast({icon: 'none',title: '不要拒绝哦'})
+            }
+          }else{
+            this_.setData({[`baseInfo.isRemind`]:false})
+            wx.showToast({icon: 'none',title: '订阅失败了鸭'})
+          }
+        }
+      })
+    }else{
+      this.setData({[`baseInfo.${field}`]:value})
+    }
+    
   },
 
   submitForm:function(){

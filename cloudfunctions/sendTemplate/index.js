@@ -26,37 +26,42 @@ exports.main = async (event) => {
     let date = new Date()
     let year = date.getFullYear()+'年'
     let month = date.getMonth() + 1
-    let date = date.getDate()
-    let date_ = year + (month<10?'0'+month:month) + '月' + (date<10?'0'+date:date) + '日'
+    let dates = date.getDate()
+    let date_ = year + (month<10?'0'+month:month) + '月' + (dates<10?'0'+dates:dates) + '日'
 
-    plans.data.forEach(e=>{
-      let result = await cloud.openapi.templateMessage.send({
-        touser:e.openid,
-        page:'pages/index/inedx',
-        data:{
-          time1:{
-            value:date_
+    let list = plans.data
+    for(let i = 0;i < list.length;i++){
+      let e = list[i]
+      try{
+        let result = await cloud.openapi.subscribeMessage.send({
+          touser:e.openid,
+          page:'pages/login/login',
+          data:{
+            time1:{
+              value:date_
+            },
+            thing3:{
+              value:'快来存钱鸭!'
+            },
+            thing4:{
+              value:'今天有没有好好存钱鸭?没存就快来吧!'
+            }
           },
-          thing3:{
-            value:'快来存钱鸭!'
-          },
-          thing4:{
-            value:'今天有没有好好存钱鸭?没存就快来吧!'
-          }
-        },
-        templateId:'Zfx6gEoTCnkPyMsPToYisufGxBC_wiM7LI2QbzwvPjs',
-        miniprogramState:'trial'
-      })
-
-      console.log(result);
-
-      if(result.errCode == '43101'){
-        // 用户取消订阅 改变计划状态
-        db.collection('user_plan').doc(e._id).update({
-          isRemind:false
+          // miniprogramState:'trial',
+          templateId:'Zfx6gEoTCnkPyMsPToYisufGxBC_wiM7LI2QbzwvPjs'
         })
+        console.log(result);
+  
+      }catch(ex){
+        console.error(e);
+        if(ex.errCode == '43101'){
+          // 用户取消订阅 改变计划状态
+          db.collection('user_plan').doc(e._id).update({
+            data:{isRemind:false}
+          })
+        }
       }
-    })
+    }
   }
 
 }
