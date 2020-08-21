@@ -11,6 +11,7 @@
 	<view class="login-text">BEAUTIFUL LIFE</view>
 
 	<view class="login-btn">
-		<button class=""  open-type="getUserInfo" type="primary" bindgetuserinfo="onGetOpenid">微信登陆</button>
+		<!-- <button class=""  open-type="getUserInfo" type="primary" bindgetuserinfo="onGetOpenid">微信登陆</button> -->
+		<button class=""  type="primary" bindtap="onGetOpenid">进入主页</button>
 	</view>
 </view>

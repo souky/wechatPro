@@ -7,40 +7,41 @@ Page({
 
   onGetOpenid: function(e) {
     wx.showLoading({title: '加载中',mask:true})
-    
-    if(e.detail.userInfo == undefined){
-      wx.showToast({
-        title: '请先进行授权哟',
-        icon: 'none',
-        duration: 2000
-      })
-      return;
-    }
-    let userInfo = e.detail.userInfo
+
+    // if(e.detail.userInfo == undefined){
+    //   wx.showToast({
+    //     title: '请先进行授权哟',
+    //     icon: 'none',
+    //     duration: 2000
+    //   })
+    //   return;
+    // }
+    // let userInfo = e.detail.userInfo
     // 调用云函数
     wx.cloud.callFunction({
       name: 'login',
       data: {},
       success: res => {
-        userInfo.openid = res.result.openid 
-        app.globalData.userInfo = userInfo
+        userInfo.openid = res.result.openid
         app.$query('user_info',{openid:userInfo.openid},'openid',res=>{
           if(res.length == '0'){
             // 需要增加用户信息
             let user = {
               openid:userInfo.openid,
-              nickName:userInfo.nickName,
-              gender:userInfo.gender,
-              avatarUrl:userInfo.avatarUrl,
+              nickName:'可爱的存钱小鸭',
+              gender:'',
+              avatarUrl:'../../images/duck.png',
               planGroupId:''
             }
-            app.$add('user_info',user,ress=>{
-              if(!ress) {
-                wx.showToast({
-                  icon: 'none',
-                  title: '授权失败'
-                })
-              }
+            app.globalData.userInfo = user
+
+            // app.$add('user_info',user,ress=>{
+            //   if(!ress) {
+            //     wx.showToast({
+            //       icon: 'none',
+            //       title: '授权失败'
+            //     })
+            //   }
               wx.hideLoading()
             })
           }else{
@@ -51,7 +52,7 @@ Page({
             console.log('已经注册');
           }
         })
-        
+
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)

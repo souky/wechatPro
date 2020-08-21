@@ -122,37 +122,17 @@ Page({
       userInfo:user
     })
     // 任务信息加载
-    app.$query('user_plan',{openid:user.openid},'createData',res=>{
+    app.$query('user_plan',{openid:user.openid,isActive:true},'createData',res=>{
       if(res.length != 0){
-        let hisList = new Array()
-        res.forEach(e=>{
-          e.days = this.getDays(e.planStartDate,e.planEndDate)
-          e.planStartDate = this.formatData(e.planStartDate)
-          e.planEndDate = this.formatData(e.planEndDate)
-          if(e.isActive) {
-            this.setData({showAdd:false,baseInfo:e})
-            this.selectComponent('#canvasRing').onLoad()
-          }
-          else hisList.push(e)
-        })
-
-        if(hisList.length == res.length) {
-          this.setData({
-            showAdd:true,
-            baseInfo:{}
-          })
-        }
-
-        if(hisList.length != 0) {
-          this.setData({
-            noRecord:false,
-            hisList:hisList
-          })
-        }
+        let e = res[0]
+        e.days = this.getDays(e.planStartDate,e.planEndDate)
+        e.planStartDate = this.formatData(e.planStartDate)
+        e.planEndDate = this.formatData(e.planEndDate)
+        this.setData({showAdd:false,baseInfo:e})
+        this.selectComponent('#canvasRing').onLoad()
       }else{
         this.setData({showAdd:true,baseInfo:{}})
       }
-
       wx.hideLoading()
     })
   },

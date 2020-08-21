@@ -45,7 +45,9 @@
 
   </view>
 
-  <view class="plan-title">往期计划</view>
+  <view class="plan-title">计划近期记录</view>
+
+  <!-- <view class="plan-title">往期计划</view>
     <view class="plan-list">
     <view class="non-plan-text" wx:if="{{noRecord}}">暂无计划</view>
 
@@ -71,7 +73,7 @@
       </view>
     </view>
 
-  </view>
+  </view> -->
 
 </view>
 <!-- <tool-bar active-color="#7890ad"

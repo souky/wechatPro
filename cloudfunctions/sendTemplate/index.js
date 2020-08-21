@@ -11,16 +11,31 @@ const _ = db.command
 
 
 exports.main = async (event) => {
-
-  const plans = await db.collection('user_plan').where({
+  let plans = new Array()
+  const countResult = await db.collection('user_plan').where({
     isActive:true,
     isRemind:true
-  }).field({
-    openid: true,
-    _id: true
-  }).get()
+  }).count()
+  const total = countResult.total
+  // 计算需分几次取
+  const batchTimes = Math.ceil(total / 100)
+  // 承载所有读操作的 promise 的数组
+  const plans = []
+  for (let i = 0; i < batchTimes; i++) {
+    const result = await db.collection('user_plan')
+    .where({
+      isActive:true,
+      isRemind:true
+    }).field({
+      openid: true,
+      _id: true
+    })
+    .orderBy('inMoney','asc')
+    .skip(i * 100).limit(100).get()
+    plans.concat(result.data)
+  }
 
-  if(plans && plans.data.length > 0){
+  if(plans && plans.length > 0){
     // 发送模板信息
 
     let date = new Date()
@@ -29,9 +44,8 @@ exports.main = async (event) => {
     let dates = date.getDate()
     let date_ = year + (month<10?'0'+month:month) + '月' + (dates<10?'0'+dates:dates) + '日'
 
-    let list = plans.data
-    for(let i = 0;i < list.length;i++){
-      let e = list[i]
+    for(let i = 0;i < plans.length;i++){
+      let e = plans[i]
       try{
         let result = await cloud.openapi.subscribeMessage.send({
           touser:e.openid,
@@ -51,7 +65,7 @@ exports.main = async (event) => {
           templateId:'Zfx6gEoTCnkPyMsPToYisufGxBC_wiM7LI2QbzwvPjs'
         })
         console.log(result);
-  
+
       }catch(ex){
         console.error(e);
         if(ex.errCode == '43101'){
