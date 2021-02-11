@@ -15,6 +15,9 @@ Page({
     noRecord:true,
     dialogShow:false,
     buttons:[{text: '取消'}, {text: '确定'}],
+    // 授权弹框
+    syncShow:false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   onReady: function () {
 
@@ -32,6 +35,58 @@ Page({
   // 删除计划
   deletePlan:function(){
     this.setData({dialogShow:true})
+  },
+  // 同步信息
+  syncUser:function(){
+    let that = this
+    // 查看是否授权
+    wx.getSetting({
+      success (res){
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          wx.getUserInfo({
+            success: function(res) {
+              // 更新用户头像以及姓名
+              that.updateUserInfo(res.userInfo)
+            }
+          })
+        } else {
+          that.setData({syncShow:true})
+        }
+      }
+    })
+  },
+  bindGetUserInfo:function(e){
+    this.updateUserInfo(e.detail.userInfo)
+  },
+  updateUserInfo:function(userInfo){
+    wx.showLoading({title: '加载中',mask:true})
+    if(userInfo){
+      app.$db.collection('user_info').doc(app.globalData.userInfo._id).update({
+        // data 传入需要局部更新的数据
+        data: {
+          // 表示将 done 字段置为 true
+          nickName: userInfo.nickName,
+          avatarUrl: userInfo.avatarUrl
+        },
+        success: res=>{
+          this.setData({syncShow:false})
+          wx.hideLoading()
+          wx.showToast({icon: 'success',title: '同步成功了鸭'})
+          app.globalData.userInfo = userInfo
+          this.initData()
+        },
+        fail: err=>{
+          this.setData({syncShow:false})
+          wx.hideLoading()
+          wx.showToast({icon: 'error',title: '同步失败了鸭,稍等在试试吧'})
+        }
+      })
+    }else{
+      wx.hideLoading()
+      wx.showToast({icon: 'none',title: '请先进行授权哟'})
+    }
+    
   },
   tapDialogButton:function(e){
     if(e.detail.index == 1){

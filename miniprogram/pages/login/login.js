@@ -2,7 +2,7 @@ const app = getApp()
 Page({
 
   data: {
-
+   
   },
 
   onGetOpenid: function(e) {
@@ -22,6 +22,7 @@ Page({
       name: 'login',
       data: {},
       success: res => {
+        let userInfo = {}
         userInfo.openid = res.result.openid
         app.$query('user_info',{openid:userInfo.openid},'openid',res=>{
           if(res.length == '0'){
@@ -33,24 +34,25 @@ Page({
               avatarUrl:'../../images/duck.png',
               planGroupId:''
             }
-            app.globalData.userInfo = user
 
-            // app.$add('user_info',user,ress=>{
-            //   if(!ress) {
-            //     wx.showToast({
-            //       icon: 'none',
-            //       title: '授权失败'
-            //     })
-            //   }
+            app.$add('user_info',user,ress=>{
+              if(!ress) {
+                wx.showToast({
+                  icon: 'none',
+                  title: '授权失败'
+                })
+              }
               wx.hideLoading()
             })
+            app.globalData.userInfo = user
           }else{
+            app.globalData.userInfo = res[0]
             wx.hideLoading()
-            wx.redirectTo({
-              url: '../index/index'
-            })
             console.log('已经注册');
           }
+          wx.redirectTo({
+            url: '../index/index'
+          })
         })
 
       },

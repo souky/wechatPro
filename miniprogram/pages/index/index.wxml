@@ -3,6 +3,7 @@
     <image width="60px" height="60px" mode="aspectFit"
     src="{{userInfo.avatarUrl}}" class="img"></image>
     <view class="user-name">{{userInfo.nickName}}</view>
+    <view class="user-sync" bindtap="syncUser">同步</view>
   </view>
 
   <view class="plan-title">当前计划</view>
@@ -74,6 +75,14 @@
     </view>
 
   </view> -->
+
+  <view wx:if="{{syncShow}}" class="sync-modal">
+    <view class="sync-body">
+      <view class="sync-text">为了更好的为您提供服务,请进行微信授权</view>
+      <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+      <view wx:else>请升级微信版本</view>
+    </view>
+  </view>
 
 </view>
 <!-- <tool-bar active-color="#7890ad"

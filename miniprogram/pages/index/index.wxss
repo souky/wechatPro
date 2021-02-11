@@ -17,6 +17,17 @@
   padding-left: 20px;
 }
 
+.user-info .user-sync{
+  width: 40px;
+  height: 20px;
+  border: 1px solid #7890AC;
+  border-radius: 5px;
+  color: #7890ad;
+  text-align: center;
+  margin-right: 5px;
+  font-size: 12px;
+}
+
 
 .plan-title{
   width: 95%;
@@ -117,4 +128,31 @@
   padding: 0 20px;
   font-size: 16px;
   border-top: 1px solid #c7c7c7;
+}
+
+.sync-modal{
+  width:100vw;
+  height: 100vh;
+  background:rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position:fixed;
+  left: 0;
+  top:0;
+}
+.sync-modal .sync-body{
+  width: 90%;
+  height: 300px;
+  background:#fff;
+  border-radius: 10px;
+}
+.sync-modal .sync-text{
+  text-align: center;
+  height: 200px;
+  line-height: 200px;
+}
+.sync-modal button{
+  background:#07c160;
+  color:#fff;
 }
